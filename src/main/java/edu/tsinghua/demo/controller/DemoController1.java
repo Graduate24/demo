@@ -2,13 +2,14 @@ package edu.tsinghua.demo.controller;
 
 import edu.tsinghua.demo.service.demo1.Demo1Service;
 import edu.tsinghua.demo.service.demo1.GoodService;
+import edu.tsinghua.demo.service.demo1.MediumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -22,6 +23,13 @@ public class DemoController1 {
 
     @Autowired
     private Map<String, Demo1Service> serviceMap;
+
+    private Map<String, Demo1Service> serviceMapNew = new HashMap<>();
+
+    {
+        serviceMapNew.put("good", new GoodService());
+        serviceMapNew.put("medium", new MediumService());
+    }
 
     @GetMapping("/test1")
     public String test1() {
@@ -44,10 +52,17 @@ public class DemoController1 {
         return serviceMap.get(level).serviceOne();
     }
 
+    @GetMapping("/test5")
+    public String test5(@RequestParam String level) {
+        return serviceMapNew.get(level).serviceOne();
+    }
+
     public static void main(String[] args) {
         DemoController1 controller1 = new DemoController1();
         controller1.test1();
         controller1.test2();
         controller1.test3();
+        controller1.test4("good");
+        controller1.test5("good");
     }
 }
