@@ -7,6 +7,10 @@ public class ShipmentService {
     @Log
     // this here is what's called a join point
     public void shipStuff() {
-        System.out.println("In Service");
+        System.out.println("shipStuff In Service");
+    }
+
+    public void shipStuffWithBill() {
+        System.out.println("shipStuffWithBill In Service");
     }
 }
