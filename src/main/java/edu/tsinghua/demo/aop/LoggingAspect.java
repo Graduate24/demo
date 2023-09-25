@@ -44,7 +44,7 @@ public class LoggingAspect {
     }
 
     @Around("logPointCutWithWildcard()")
-    public void logAllMethodCallsAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object logAllMethodCallsAdvice(ProceedingJoinPoint joinPoint) throws Throwable {
         //before point joint
         System.out.println("In Aspect at " + joinPoint.getSignature().getName());
         System.out.println("==");
@@ -63,10 +63,12 @@ public class LoggingAspect {
         }
         // execute point joint
         System.out.print("execute point joint: ");
-        joinPoint.proceed(newArgus);
+        Object ret = joinPoint.proceed(newArgus);
         System.out.println("==");
         //after point joint
         System.out.println("after...");
+
+        return ret;
 
 
     }
