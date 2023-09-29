@@ -19,6 +19,14 @@ public class LoggingAspect {
     public void logPointcutWithExecution() {
     }
 
+    @Pointcut("execution(public void edu.tsinghua.demo.aop.ShipmentService.innerCheck())")
+    public void innerCheck() {
+    }
+
+    @Pointcut("execution(public void edu.tsinghua.demo.aop.ShipmentService.outerCheck())")
+    public void outerCheck() {
+    }
+
     @Pointcut("execution(public * edu.tsinghua.demo.aop.BillService.*(..))")
     public void logPointCutWithWildcard() {
     }
@@ -30,7 +38,7 @@ public class LoggingAspect {
 
     @Before("logPointcut()")
     public void logAllMethodCallsAdvice() {
-        System.out.println("In Aspect");
+        System.out.println("@Log in Aspect");
     }
 
     @Before("logPointcutWithExecution()")
@@ -41,6 +49,18 @@ public class LoggingAspect {
     @Before("logPointcutWithLogicalOperator()")
     public void logPointcutWithLogicalOperatorAdvice() {
         System.out.println("In Aspect from logical operator");
+    }
+
+    @Before("innerCheck()")
+    public void innerCheckAdvice() {
+        // this won't work because calls within the target object are not intercepted
+        // https://docs.spring.io/spring-framework/reference/core/aop/ataspectj/pointcuts.html
+        System.out.println("In Aspect from inner check");
+    }
+
+    @Before("outerCheck()")
+    public void outerCheckAdvice() {
+        System.out.println("In Aspect from outer check");
     }
 
     @Around("logPointCutWithWildcard()")

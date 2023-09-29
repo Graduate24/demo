@@ -25,6 +25,11 @@ class AopApplicationTests {
     }
 
     @Test
+    void testBeforeOuter() {
+        shipmentService.outerCheck();
+    }
+
+    @Test
     void testBillService() {
         billService.bill();
     }
@@ -44,6 +49,11 @@ class AopApplicationTests {
     @Test
     void test() {
         billService.sendBill("beijing", 100.00);
+    }
+
+    @Test
+    void test2(){
+        orderService.callOuter();
     }
 
 }
