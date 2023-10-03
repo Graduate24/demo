@@ -3,6 +3,7 @@ package edu.tsinghua.demo.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties(prefix = "mail")
 @ConfigurationPropertiesScan
+@Scope("prototype")
 public class ConfigProperties {
 
     private String hostName;

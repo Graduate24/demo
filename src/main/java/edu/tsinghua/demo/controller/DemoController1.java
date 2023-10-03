@@ -19,7 +19,11 @@ public class DemoController1 {
     @Qualifier("good")
     private Demo1Service service;
 
+    private String field1 = "default";
+
     private Demo1Service serviceNew = new GoodService();
+
+    private String field2 = serviceNew.serviceOne();
 
     @Autowired
     private Map<String, Demo1Service> serviceMap;

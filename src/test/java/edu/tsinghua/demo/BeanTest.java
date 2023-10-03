@@ -4,8 +4,11 @@ import edu.tsinghua.demo.config.ConfigProperties;
 import edu.tsinghua.demo.config.FieldValueTestBean;
 import edu.tsinghua.demo.entity.MyBean;
 import edu.tsinghua.demo.entity.MyBeanConsumer;
+import edu.tsinghua.demo.service.demo1.Demo1Service;
+import edu.tsinghua.demo.service.demo1.MediumService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,9 +19,15 @@ public class BeanTest {
     private MyBean myBean;
     @Autowired
     private MyBeanConsumer myBeanConsumer;
+    @Autowired
+    @Qualifier("medium")
+    private Demo1Service mediumService;
 
     @Autowired
     private ConfigProperties mail;
+
+    @Autowired
+    private ConfigProperties mail2;
 
     @Autowired
     private FieldValueTestBean fieldValueTestBean;
@@ -45,6 +54,14 @@ public class BeanTest {
         assertThat(mail.getCredentials().getPassword()).isEqualTo("password");
         assertThat(mail.getCredentials().getUsername()).isEqualTo("john");
 
+
+
+    }
+
+    @Test
+    public void test4(){
+        assertThat(mail).isNotEqualTo(mail2);
+        assertThat(mail.getCredentials()).isNotEqualTo(mail2.getCredentials());
     }
 
     @Test

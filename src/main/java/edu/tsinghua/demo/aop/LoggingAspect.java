@@ -1,11 +1,14 @@
 package edu.tsinghua.demo.aop;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+
+import java.util.Arrays;
 
 @Component
 @Aspect
@@ -37,7 +40,8 @@ public class LoggingAspect {
 
 
     @Before("logPointcut()")
-    public void logAllMethodCallsAdvice() {
+    public void logAllMethodCallsAdvice1(JoinPoint joinPoint) {
+        System.out.println(Arrays.toString(joinPoint.getArgs()));
         System.out.println("@Log in Aspect");
     }
 

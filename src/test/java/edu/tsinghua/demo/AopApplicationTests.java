@@ -3,6 +3,7 @@ package edu.tsinghua.demo;
 import edu.tsinghua.demo.aop.BillService;
 import edu.tsinghua.demo.aop.OrderService;
 import edu.tsinghua.demo.aop.ShipmentService;
+import edu.tsinghua.demo.aop.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,10 +14,17 @@ class AopApplicationTests {
     ShipmentService shipmentService;
     @Autowired
     BillService billService;
+    @Autowired
+    UserService userService;
 
     @Test
     void testBeforeLog() {
         shipmentService.shipStuff();
+    }
+
+    @Test
+    void testUserLog() {
+        userService.place("beijing");
     }
 
     @Test
