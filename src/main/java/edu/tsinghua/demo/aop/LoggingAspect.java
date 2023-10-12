@@ -7,6 +7,9 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @Aspect
 public class LoggingAspect {
@@ -65,8 +68,10 @@ public class LoggingAspect {
         System.out.print("execute point joint: ");
         Object ret = joinPoint.proceed(newArgus);
         System.out.println("==");
+        System.out.println("return value: " + ret);
         //after point joint
-        System.out.println("after...");
+        ret = "new result";
+        System.out.println("change return value:" + ret);
 
         return ret;
 

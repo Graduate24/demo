@@ -43,7 +43,8 @@ class AopApplicationTests {
     }
     @Test
     void test() {
-        billService.sendBill("beijing", 100.00);
+        String result = billService.sendBill("beijing", 100.00);
+        System.out.println(result);
     }
 
 }

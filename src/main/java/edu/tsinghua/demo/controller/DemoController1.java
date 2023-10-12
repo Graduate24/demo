@@ -19,6 +19,9 @@ public class DemoController1 {
     @Qualifier("good")
     private Demo1Service service;
 
+    @Autowired
+    private Demo1Service medium;
+
     private Demo1Service serviceNew = new GoodService();
 
     @Autowired
@@ -45,6 +48,11 @@ public class DemoController1 {
     public String test3() {
         Demo1Service service3 = new GoodService();
         return service3.serviceTwo();
+    }
+
+    @GetMapping("/test6")
+    public String test6() {
+        return medium.serviceTwo();
     }
 
     @GetMapping("/test4")
