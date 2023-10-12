@@ -30,6 +30,9 @@ public class LoggingAspect {
     public void logPointcutWithLogicalOperator() {
     }
 
+    @Pointcut("execution(public * edu.tsinghua.demo.aop.MathCalculator.add(..))")
+    public void mathAdd() {
+    }
 
     @Before("logPointcut()")
     public void logAllMethodCallsAdvice() {
@@ -74,7 +77,23 @@ public class LoggingAspect {
         System.out.println("change return value:" + ret);
 
         return ret;
+    }
 
+    @Around("mathAdd()")
+    public Object modifyAdd(ProceedingJoinPoint joinPoint) throws Throwable {
+        // Intercept the method call
+        Object[] args = joinPoint.getArgs();
+        int modifiedArg1 = (int) args[0] + 1;
+        int modifiedArg2 = (int) args[1] + 1;
+        System.out.println("original arg0:" + args[0] + "; original arg1:" + args[1]);
+        System.out.println("modify arg1 to: " + modifiedArg1 + "; arg1 to: " + modifiedArg2);
 
+        // Call the original method with modified arguments
+        Object result = joinPoint.proceed(new Object[]{modifiedArg1, modifiedArg2});
+
+        // Modify the return value
+        int modifiedResult = (int) result * 2;
+        System.out.println("original result:" + result + "; modified result:(a + b)*2:" + modifiedResult);
+        return modifiedResult;
     }
 }

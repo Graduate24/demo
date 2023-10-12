@@ -1,6 +1,7 @@
 package edu.tsinghua.demo;
 
 import edu.tsinghua.demo.aop.BillService;
+import edu.tsinghua.demo.aop.MathCalculator;
 import edu.tsinghua.demo.aop.OrderService;
 import edu.tsinghua.demo.aop.ShipmentService;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,8 @@ class AopApplicationTests {
     ShipmentService shipmentService;
     @Autowired
     BillService billService;
+    @Autowired
+    MathCalculator mathCalculator;
 
     @Test
     void testBeforeLog() {
@@ -45,6 +48,11 @@ class AopApplicationTests {
     void test() {
         String result = billService.sendBill("beijing", 100.00);
         System.out.println(result);
+    }
+
+    @Test
+    void testAroundAop(){
+        mathCalculator.add(1,2);
     }
 
 }
