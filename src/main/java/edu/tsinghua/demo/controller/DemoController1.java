@@ -21,6 +21,9 @@ public class DemoController1 {
 
     private String field1 = "default";
 
+    @Autowired
+    private Demo1Service medium;
+
     private Demo1Service serviceNew = new GoodService();
 
     private String field2 = serviceNew.serviceOne();
@@ -49,6 +52,11 @@ public class DemoController1 {
     public String test3() {
         Demo1Service service3 = new GoodService();
         return service3.serviceTwo();
+    }
+
+    @GetMapping("/test6")
+    public String test6() {
+        return medium.serviceTwo();
     }
 
     @GetMapping("/test4")

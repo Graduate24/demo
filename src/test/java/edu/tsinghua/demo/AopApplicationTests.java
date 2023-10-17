@@ -1,6 +1,7 @@
 package edu.tsinghua.demo;
 
 import edu.tsinghua.demo.aop.BillService;
+import edu.tsinghua.demo.aop.MathCalculator;
 import edu.tsinghua.demo.aop.OrderService;
 import edu.tsinghua.demo.aop.ShipmentService;
 import edu.tsinghua.demo.aop.UserService;
@@ -14,6 +15,8 @@ class AopApplicationTests {
     ShipmentService shipmentService;
     @Autowired
     BillService billService;
+    @Autowired
+    MathCalculator mathCalculator;
     @Autowired
     UserService userService;
 
@@ -56,7 +59,13 @@ class AopApplicationTests {
     }
     @Test
     void test() {
-        billService.sendBill("beijing", 100.00);
+        String result = billService.sendBill("beijing", 100.00);
+        System.out.println(result);
+    }
+
+    @Test
+    void testAroundAop(){
+        mathCalculator.add(1,2);
     }
 
     @Test
