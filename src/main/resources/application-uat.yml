@@ -1,5 +1,17 @@
 server:
   port: 8012
+spring:
+  datasource:
+    driver-class-name: org.sqlite.JDBC
+    url: jdbc:sqlite:test.db
+    username: root
+    password: ROOT
+
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.sqlite.hibernate.dialect.SQLiteDialect
 
 field: Test
 
