@@ -82,9 +82,9 @@ public class DemoController1 {
     }
 
     @GetMapping("/test8")
-    public User test8(@RequestParam String name) {
-        User user =  userRepository.findByName(name);
-        return user;
+    public List<User> test8(@RequestParam String name) {
+        List<User> userList =  userRepository.findByName(name);
+        return userList;
     }
 
     public static void main(String[] args) {
