@@ -39,7 +39,6 @@ public class DemoController1 {
     private UserRepository userRepository;
 
     private Map<String, Demo1Service> serviceMapNew = new HashMap<>();
-
     {
         serviceMapNew.put("good", new GoodService());
         serviceMapNew.put("medium", new MediumService());
