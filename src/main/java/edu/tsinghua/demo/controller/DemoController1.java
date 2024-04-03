@@ -5,8 +5,10 @@ import edu.tsinghua.demo.dao.repo.UserRepository;
 import edu.tsinghua.demo.service.demo1.Demo1Service;
 import edu.tsinghua.demo.service.demo1.GoodService;
 import edu.tsinghua.demo.service.demo1.MediumService;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,7 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-public class DemoController1 {
+@Lazy
+public class DemoController1 implements InitializingBean {
 
     @Autowired
     @Qualifier("good")
@@ -27,6 +30,8 @@ public class DemoController1 {
 
     @Autowired
     private Demo1Service medium;
+
+    private Demo1Service good;
 
     private Demo1Service serviceNew = new GoodService();
 
@@ -95,5 +100,12 @@ public class DemoController1 {
         controller1.test4("good");
         controller1.test5("good");
         controller1.test7("Alex");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println(good);
+        System.out.println(service);
+        System.out.println(medium);
     }
 }
