@@ -2,10 +2,7 @@ package edu.tsinghua.demo.aop;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -17,7 +14,7 @@ import java.util.List;
 @Aspect
 public class LoggingAspect {
 
-    @Pointcut("@annotation(Log)")
+    @Pointcut("@annotation(edu.tsinghua.demo.aop.Log)")
     public void logPointcut() {
     }
 
@@ -45,6 +42,10 @@ public class LoggingAspect {
     public void mathAdd() {
     }
 
+    @Pointcut("mathAdd()")
+    public void mathAdd2() {
+    }
+
     @Before("logPointcut()")
     public void logAllMethodCallsAdvice1(JoinPoint joinPoint) {
         System.out.println(Arrays.toString(joinPoint.getArgs()));
@@ -55,6 +56,21 @@ public class LoggingAspect {
     public void logMethodCallsWithExecutionAdvice() {
         System.out.println("In Aspect from execution");
     }
+    @After("logPointcutWithExecution()")
+    public void after() {
+        System.out.println("In Aspect from execution");
+    }
+
+    @AfterReturning("logPointcutWithExecution()||logPointcutWithLogicalOperator()")
+    public void afterReturn() {
+        System.out.println("In Aspect from execution");
+    }
+
+    @AfterThrowing("outerCheck()||innerCheck()")
+    public void afterThrowing() {
+        System.out.println("In Aspect from execution");
+    }
+
 
     @Before("logPointcutWithLogicalOperator()")
     public void logPointcutWithLogicalOperatorAdvice() {

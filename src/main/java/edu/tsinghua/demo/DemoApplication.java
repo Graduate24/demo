@@ -10,10 +10,13 @@ import org.springframework.cglib.core.DebuggingClassWriter;
 public class DemoApplication {
 
     public static void main(String[] args) {
+
+        SpringApplication.run(DemoApplication.class, args);
+        System.out.println("-----");
         System.getProperties().setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles", "true");
         String path = System.getProperty("user.dir");
         System.setProperty(DebuggingClassWriter.DEBUG_LOCATION_PROPERTY, path);
-        SpringApplication.run(DemoApplication.class, args);
+        System.out.println("+++++");
 
     }
 
